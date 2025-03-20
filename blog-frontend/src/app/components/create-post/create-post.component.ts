@@ -1,11 +1,44 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { Router } from '@angular/router';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-create-post',
-  imports: [],
   templateUrl: './create-post.component.html',
-  styleUrl: './create-post.component.scss'
+  styleUrls: ['./create-post.component.scss'],
+  imports: [
+    MatCardModule,
+    MatFormFieldModule,
+    ReactiveFormsModule
+  ]
 })
 export class CreatePostComponent {
+  postForm: FormGroup;
 
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private postService: PostService
+  ) {
+    this.postForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(3)]],
+      content: ['', [Validators.required, Validators.minLength(10)]],
+    });
+  }
+
+  onSubmit() {
+    if (this.postForm.valid) {
+      const newPost = this.postForm.value;
+      this.postService.createPost(newPost).subscribe((res: any) => {
+        this.router.navigate(['/posts']);
+      });
+    }
+  }
+
+  onCancel() {
+    this.router.navigate(['/posts']);
+  }
 }

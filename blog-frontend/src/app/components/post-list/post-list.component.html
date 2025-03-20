@@ -1,11 +1,24 @@
 <div class="container mt-5">
-    <h2>Posts</h2>
-    <mat-card *ngFor="let post of posts" class="mb-3">
-        <mat-card-header>
-            <mat-card-title>{{ post.title }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <p>{{ post.content }}</p>
-        </mat-card-content>
-    </mat-card>
+
+    <div style="display: flex;">
+        <h2 class="mb-4">Posts</h2>
+        <button mat-raised-button color="primary" (click)="createPost()">Create New Post</button>
+    </div>
+
+    <ng-container *ngIf="posts.length > 0; else noPosts">
+        <mat-card *ngFor="let post of posts" class="mb-3 shadow-sm">
+            <mat-card-header>
+                <mat-card-title>{{ post.title }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p class="text-muted">{{ post.content }}</p>
+            </mat-card-content>
+        </mat-card>
+    </ng-container>
+
+    <ng-template #noPosts>
+        <div class="text-center mt-4">
+            <p class="text-muted">No posts created yet.</p>
+        </div>
+    </ng-template>
 </div>
