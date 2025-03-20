@@ -20,7 +20,7 @@ export class LoginComponent {
 
   login() {
     this.authService.login({ email: this.email, password: this.password }).subscribe(response => {
-      localStorage.setItem('token', response.access_token);
+      this.authService.updateLogin(response.access_token);
       this.router.navigate(['/posts']);
     }, error => {
       console.error('Login failed', error);
