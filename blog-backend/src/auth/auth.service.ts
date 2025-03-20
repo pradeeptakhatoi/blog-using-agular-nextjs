@@ -22,7 +22,7 @@ export class AuthService {
                 email: profile.email,
                 name: profile.name,
                 provider,
-                providerId: profile.id,
+                providerId: profile?.id,
             });
             await this.usersRepository.save(user);
         }
@@ -37,5 +37,27 @@ export class AuthService {
             throw new UnauthorizedException('User not found');
         }
         return user;
+    }
+
+    // ✅ Validate user login
+    // async validateUser(email: string, password: string) {
+    //     const user = await this.usersService.findByEmail(email);
+    //     if (!user) throw new UnauthorizedException('Invalid credentials');
+
+    //     const isPasswordValid = await bcrypt.compare(password, user.password);
+    //     if (!isPasswordValid) throw new UnauthorizedException('Invalid credentials');
+
+    //     return user;
+    // }
+
+    // ✅ Login and generate JWT token
+    async login(userDto: any) {
+        const user = await this.validateUser(userDto.email);
+        const payload = { userId: user.id, email: user.email };
+
+        return {
+            access_token: this.jwtService.sign(payload),
+            user,
+        };
     }
 }

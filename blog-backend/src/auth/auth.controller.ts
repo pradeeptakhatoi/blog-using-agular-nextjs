@@ -1,4 +1,4 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { GoogleAuthGuard } from './guards/google-auth.guard';
 import { FacebookAuthGuard } from './guards/facebook-auth.guard';
@@ -7,6 +7,12 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 @Controller('auth')
 export class AuthController {
     constructor(private readonly authService: AuthService) { }
+
+    // ✅ Login and get JWT token
+    @Post('login')
+    async login(@Body() userDto: any) {
+        return this.authService.login(userDto);
+    }
 
     @Get('google')
     @UseGuards(GoogleAuthGuard)
