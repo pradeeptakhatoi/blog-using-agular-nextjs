@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { PostService } from '../../services/post.service';
 
@@ -12,6 +13,7 @@ import { PostService } from '../../services/post.service';
   imports: [
     MatCardModule,
     MatFormFieldModule,
+    MatIconModule,
     ReactiveFormsModule
   ]
 })
