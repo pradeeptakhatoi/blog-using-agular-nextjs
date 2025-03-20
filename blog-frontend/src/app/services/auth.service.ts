@@ -39,4 +39,12 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
+
+  googleLogin() {
+    window.location.href = `${this.apiUrl}/google`; // Redirects to Google Auth
+  }
+
+  facebookLogin() {
+    window.location.href = `${this.apiUrl}/facebook`; // Redirects to Facebook Auth
+  }
 }

@@ -31,10 +31,13 @@ export class AuthService {
         return this.jwtService.sign(payload);
     }
 
-    async validateUser(email: string): Promise<User> {
+    async validateUser(email: string, password: string): Promise<User> {
         const user = await this.usersService.findByEmail(email);
         if (!user) {
             throw new UnauthorizedException('User not found');
+        }
+        if (user.password !== password) {
+            throw new UnauthorizedException('Invalid password');
         }
         return user;
     }
@@ -52,7 +55,7 @@ export class AuthService {
 
     // ✅ Login and generate JWT token
     async login(userDto: any) {
-        const user = await this.validateUser(userDto.email);
+        const user = await this.validateUser(userDto.email, userDto.password);
         const payload = { userId: user.id, email: user.email };
 
         return {
