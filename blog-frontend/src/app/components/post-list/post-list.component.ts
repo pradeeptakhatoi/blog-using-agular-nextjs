@@ -2,14 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { NgFor, CommonModule } from '@angular/common'; // ✅ Import CommonModule
 import { PostService } from '../../services/post.service';
 import { MatCardModule } from '@angular/material/card'; // ✅ Import Material Card
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-post-list',
   standalone: true, // ✅ Standalone component
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.scss'],
-  imports: [CommonModule, NgFor, MatCardModule] // ✅ Add CommonModule & NgFor
+  imports: [
+    CommonModule, 
+    NgFor, 
+    MatCardModule,
+    RouterModule
+  ] 
 })
 export class PostListComponent implements OnInit {
   posts: any[] = [];
