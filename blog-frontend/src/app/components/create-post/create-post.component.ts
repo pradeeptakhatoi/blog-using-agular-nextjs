@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { PostService } from '../../services/post.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-post',
@@ -14,7 +15,8 @@ import { PostService } from '../../services/post.service';
     MatCardModule,
     MatFormFieldModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ]
 })
 export class CreatePostComponent {
