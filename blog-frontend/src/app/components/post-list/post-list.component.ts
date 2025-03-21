@@ -3,6 +3,7 @@ import { NgFor, CommonModule } from '@angular/common'; // ✅ Import CommonModul
 import { PostService } from '../../services/post.service';
 import { MatCardModule } from '@angular/material/card'; // ✅ Import Material Card
 import { Router, RouterModule } from '@angular/router';
+import { Post } from '../../models/post.model';
 
 @Component({
   selector: 'app-post-list',
@@ -10,14 +11,14 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.scss'],
   imports: [
-    CommonModule, 
-    NgFor, 
+    CommonModule,
+    NgFor,
     MatCardModule,
     RouterModule
-  ] 
+  ]
 })
 export class PostListComponent implements OnInit {
-  posts: any[] = [];
+  posts: Post[] = [];
 
   constructor(
     private postService: PostService,
@@ -25,7 +26,7 @@ export class PostListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.postService.getPosts().subscribe(data => {
+    this.postService.getPosts().subscribe((data: Post[]) => {
       this.posts = data;
     });
   }
