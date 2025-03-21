@@ -14,10 +14,10 @@ export class User {
     @Column({ length: 255 })
     password: string;
 
-    @Column({ length: 100 })
+    @Column({ nullable: true, length: 100 })
     firstName: string;
 
-    @Column({ length: 100 })
+    @Column({ nullable: true, length: 100 })
     lastName: string;
 
     @Column({ nullable: true })

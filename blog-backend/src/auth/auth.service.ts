@@ -63,4 +63,10 @@ export class AuthService {
             user,
         };
     }
+
+    async create(user: Partial<User>): Promise<User> {
+        return this.usersRepository.save(user);
+    }
+
+
 }

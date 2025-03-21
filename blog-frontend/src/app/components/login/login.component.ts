@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms'; // ✅ Import FormsModule
 import { MatCardModule } from '@angular/material/card'; // ✅ Import MatCardModule
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,7 +12,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [FormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatIconModule]
+  imports: [
+    FormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    RouterModule
+  ]
 })
 export class LoginComponent {
   credentials = { email: '', password: '' };

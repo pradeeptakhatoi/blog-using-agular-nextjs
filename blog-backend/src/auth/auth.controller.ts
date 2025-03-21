@@ -14,6 +14,11 @@ export class AuthController {
         return this.authService.login(userDto);
     }
 
+    @Post('register')
+    async register(@Body() userDto: any) {
+        return this.authService.create(userDto);
+    }
+
     @Get('google')
     @UseGuards(GoogleAuthGuard)
     async googleAuth(@Req() req) {
