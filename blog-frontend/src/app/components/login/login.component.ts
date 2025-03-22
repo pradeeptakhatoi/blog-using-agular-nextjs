@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms'; // ✅ Import FormsModule
@@ -21,7 +21,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     RouterModule
   ]
 })
-export class LoginComponent {
+export class LoginComponent  implements OnInit {
   credentials = { email: '', password: '' };
 
   constructor(
@@ -29,6 +29,15 @@ export class LoginComponent {
     private router: Router,
     private snackBar: MatSnackBar
   ) { }
+
+  ngOnInit(): void {
+    // If User is already loggedin then redirect to Home Page
+    this.authService.isLoggedIn$.subscribe(status => {
+      if (status) {
+        this.router.navigate(['/'])
+      }
+    });
+  }
 
   login() {
     this.authService.login(this.credentials).subscribe((response: any) => {

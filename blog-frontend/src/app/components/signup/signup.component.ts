@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -19,7 +19,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
@@ -44,6 +45,13 @@ export class SignupComponent implements OnInit {
       },
       { validator: this.passwordMatchValidator } // Custom validator
     );
+
+    // If User is already loggedin then redirect to Home Page
+    this.authService.isLoggedIn$.subscribe(status => {
+      if (status) {
+        this.router.navigate(['/'])
+      }
+    });
   }
 
   // Custom Validator: Check if Password & Confirm Password match
