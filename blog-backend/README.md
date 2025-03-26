@@ -31,7 +31,7 @@
 $ npm install
 ```
 
-## Compile and run the project
+## Compile and run the project in local
 
 ```bash
 # development
@@ -44,55 +44,75 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
 ## Deployment
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Configure Environment Variables
+Create a .env file in the root directory and update it with your PostgreSQL and OAuth credentials:
 
 ```bash
-$ npm install -g mau
-$ mau deploy
+# Server Configuration
+PORT=3000
+
+# JWT Configuration
+JWT_SECRET=my_super_secret_jwt_key
+
+# Google OAuth (Replace with real credentials from Google Cloud Console)
+GOOGLE_CLIENT_ID=1234567890-abcdefg.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+GOOGLE_CALLBACK_URL=http://localhost:3000/auth/google/callback
+
+# Facebook OAuth (Replace with real credentials from Facebook Developer Console)
+FACEBOOK_CLIENT_ID=1234567890
+FACEBOOK_CLIENT_SECRET=your_facebook_client_secret
+FACEBOOK_CALLBACK_URL=http://localhost:3000/auth/facebook/callback
+
+# Database Configuration (PostgreSQL)
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=123456
+DB_NAME=mynestjsblogdb
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
-## Resources
 
-Check out a few resources that may come in handy when working with NestJS:
+## How to Build and Run the Docker Container
+1️⃣ Build the Docker Image
+```bash
+docker build -t blog-backend .
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+2️⃣ Run the Container
+```bash
+docker run -p 3000:3000 --env-file .env blog-backend
+```
 
-## Support
+## 📌 API Endpoints
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### 🔹 Authentication Routes
+| Method | Endpoint         | Description                     |
+|--------|-----------------|---------------------------------|
+| `POST` | `/auth/login`   | Login with email & password    |
+| `POST` | `/auth/signup`  | Register a new user            |
+| `GET`  | `/auth/google`  | Google OAuth login             |
+| `GET`  | `/auth/facebook`| Facebook OAuth login           |
 
-## Stay in touch
+### 🔹 User Routes
+| Method   | Endpoint       | Description         |
+|----------|---------------|---------------------|
+| `GET`    | `/users`      | Get all users      |
+| `GET`    | `/users/:id`  | Get a user by ID   |
+| `POST`   | `/users`      | Create a new user  |
+| `PUT`    | `/users/:id`  | Update a user      |
+| `DELETE` | `/users/:id`  | Delete a user      |
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### 🔹 Post Routes
+| Method   | Endpoint       | Description        |
+|----------|---------------|--------------------|
+| `GET`    | `/posts`      | Get all posts     |
+| `GET`    | `/posts/:id`  | Get a post by ID  |
+| `POST`   | `/posts`      | Create a new post |
+| `PUT`    | `/posts/:id`  | Update a post     |
+| `DELETE` | `/posts/:id`  | Delete a post     |
 
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+---
