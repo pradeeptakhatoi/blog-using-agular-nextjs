@@ -2,7 +2,29 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.7.
 
-## Development server
+## Features
+The application includes the following functionalities:
+
+1. **Signup Page** – Users can register with email and password.
+2. **Login Page** – Supports login via email/password, Google, and Facebook.
+3. **Post Management** – Users can create, edit, and delete blog posts.
+4. **User Dashboard** – Displays user-specific blog posts.
+5. **Responsive UI** – Designed with Angular Material & Bootstrap for a seamless experience.
+
+## Prerequisites
+Ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v16 or later)
+- [Angular CLI](https://angular.io/cli) (v19 or later)
+
+## Installation
+
+1. **Clone the Repository**
+   ```sh
+   git clone https://github.com/your-repository/blog-frontend.git
+   cd blog-frontend
+
+## Local Development server
 
 To start a local development server, run:
 
@@ -11,20 +33,6 @@ ng serve
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
 
 ## Building
 
@@ -44,16 +52,24 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 ng test
 ```
 
-## Running end-to-end tests
+## Build for Production
 
-For end-to-end (e2e) testing, run:
-
+To create an optimized production build:
 ```bash
-ng e2e
+npm run build
 ```
+This will generate the build files inside the dist/ folder.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### To deploy the application, upload the dist/ folder to any static hosting service like:
 
-## Additional Resources
+1. **Vercel**
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+2. **Netlify**
+
+3. **Firebase Hosting**
+
+4. **AWS S3 + CloudFront**
+
+
+
+
